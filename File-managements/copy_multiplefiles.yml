@@ -1,0 +1,13 @@
+---
+- name: copy multiple files to remote location
+  hosts: servera
+  become: yes
+  tasks:
+    - name: copy from current host to some remote host
+      copy:
+        src: "{{ item }}"
+        dest:  /var/tmp/backupconfigs
+      loop:
+        - /etc/appconfig1.cfg
+        - /etc/appconfig2.cfg
+        - /etc/appconfig3.cfg

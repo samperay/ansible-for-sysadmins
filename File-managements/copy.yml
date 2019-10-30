@@ -1,0 +1,13 @@
+---
+- name: copy file from local to remote machine
+  hosts: servera
+  vars:
+    remotefile: index.html
+  tasks:
+    - name: copy from localhost to /var/www/html/index.html
+      copy:
+        src: "{{ remotefile }}"
+        dest:  /var/www/html
+        owner: root
+        group: root
+        mode: 0400
