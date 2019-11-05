@@ -1,0 +1,27 @@
+---
+- name: delete local users, users and associated keys
+  hosts: servera
+  become: yes
+  vars_files:
+    - vars/users_groups.yml
+
+  tasks:
+    - name: delete users authorized_keys
+      authorized_key:
+        user: "{{ item.username }}"
+        key: "{{ lookup('file','files/'+item.username+'.pub') }}"
+        state: absent
+      loop: "{{ users }}"
+
+    - name: delete group "{{ usergroup }}"
+      group:
+        name: "{{ usergroup }}" 
+        state: absent
+
+    - name: delete default users and groups
+      user:
+        name: "{{ item.username }}"
+        groups: "{{ usergroup }}"
+        state: absent
+      loop: "{{ users }}"
+
