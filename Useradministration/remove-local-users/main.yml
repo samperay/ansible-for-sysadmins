@@ -1,12 +1,12 @@
 ---
-- name: create local users
+- name: remove local users
   hosts: servera
   become: yes
   vars_files:
     - usernames.yml
 
   tasks:
-    - name: create default users and groups
+    - name: remove default users and groups
       user:
         name: "{{ item.username }}"
         state: absent
