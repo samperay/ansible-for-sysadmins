@@ -5,6 +5,12 @@
   vars_files:
     - vars/users_groups.yml
 
+  handlers:
+    - name: restart sshd
+      service:
+        name: sshd
+        state: restarted
+
   tasks:
     - name: create "{{ usergroup }}"
       group:
