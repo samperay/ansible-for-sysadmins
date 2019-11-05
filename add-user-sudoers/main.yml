@@ -1,0 +1,22 @@
+---
+- name: added user to sudoers file to get admin rights
+  hosts: servera
+  become: yes
+  vars:
+    username: ansible-admin
+    password: $5$R4XivuCSv$vwlwkNHetMVewNIzrwNRbEIhRodg7gkZoCtakryRhDA    
+
+  tasks:
+    - name: create "{{ username }}" for sudo access
+      user:
+        name: "{{ username }}"
+        state: present
+        password: "{{ password }}"
+
+    - name: add user "{{ username }}" to sudoers file
+      lineinfile:
+        dest: /etc/sudoers
+        state: present
+        regexp: "^{{ username }}"
+        line: "{{ username }} ALL=(ALL) NOPASSWD:ALL"
+
