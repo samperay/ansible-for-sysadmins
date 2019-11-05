@@ -1,0 +1,7 @@
+---
+usergroup: wasadmin
+pass: $5$r6tv/KNJ6dM6A$exM4/4MUnRXWl5sNRGhiV2.bN9GcbgJBtjoxGzcn/Q5
+users:
+  - username: user1
+  - username: user2
+  - username: user3

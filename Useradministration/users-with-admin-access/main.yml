@@ -1,0 +1,53 @@
+---
+- name: create local users
+  hosts: servera
+  become: yes
+  vars_files:
+    - vars/users_groups.yml
+
+  handlers:
+    - name: restart sshd
+      service:
+        name: sshd
+        state: restarted
+
+  tasks:
+    - name: create "{{ usergroup }}"
+      group:
+        name: "{{ usergroup }}" 
+        state: present
+
+    - name: create default users and groups
+      user:
+        name: "{{ item.username }}"
+        groups: "{{ usergroup }}"
+        state: present
+      loop: "{{ users }}"
+
+    - name: assign password to newly created users
+      user:
+        name: "{{ item.username }}"
+        password: "{{ pass }}"
+      loop: "{{ users }}"
+
+    - name: add users authorized_keys
+      authorized_key:
+        user: "{{ item.username }}"
+        key: "{{ lookup('file','files/'+item.username+'.pub') }}"
+      loop: "{{ users }}"
+    
+    - name: add these users into sudoers
+      lineinfile:
+        dest: /etc/sudoers
+        state: present
+        regexp: "^%wasadmin"
+        line: "%wasadmin ALL=(ALL) NOPASSWD: ALL"
+
+    - name: disable root login
+      lineinfile:
+        dest: /etc/ssh/sshd_config
+        state: present
+        regexp: "^PermitRootLogin"
+        line: "PermitRootLogin no"
+      notify: restart sshd
+
