@@ -1,0 +1,19 @@
+---
+- name: create local users
+  hosts: servera
+  become: yes
+  vars_files:
+    - users_groups.yml
+
+  tasks:
+    - name: create "{{ usergroup }}"
+      group:
+        name: "{{ usergroup }}" 
+        state: present
+
+    - name: create default users and groups
+      user:
+        name: "{{ item.username }}"
+        groups: "{{ usergroup }}"
+        state: present
+      loop: "{{ users }}"
