@@ -1,0 +1,19 @@
+---
+- name: disbale direct root login
+  hosts: servera
+  become: yes
+
+  tasks:
+    - name: modify sshd config file to disable root login
+      lineinfile:
+        dest: /etc/ssh/sshd_config
+        state: present
+        regexp: "^PermitRootLogin"
+        line: "PermitRootLogin no"
+      notify: restart sshd
+
+  handlers:
+    - name: restart sshd
+      service:
+        name: sshd
+        state: restarted
