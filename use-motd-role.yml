@@ -1,0 +1,6 @@
+---
+- name: modify motd 
+  hosts: servera
+  become: yes
+  roles:
+    - motd

@@ -1,0 +1,4 @@
+---
+# defaults file for motd
+system_owner: sunil@devtests.rocks
+env: testing
