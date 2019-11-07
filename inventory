@@ -9,29 +9,27 @@ web
 db
 
 [webservers]
-server[a:d].lab.example.com
+servera
 
 [raleigh]
-servera.lab.example.com
-serverb.lab.example.com
+servera
+serverb
 
 [mountainview]
-serverc.lab.example.com
+serverc
 
 [london]
-
-serverd.lab.example.com
+serverd
 
 [development]
-
-servera.lab.example.com
+servera
 
 [testing]
-serverb.lab.example.com
+serverb
 
 [production]
-serverc.lab.example.com
-serverd.lab.example.com
+serverc
+serverd
 
 [us:children]
 raleigh
