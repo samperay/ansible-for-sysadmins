@@ -1,0 +1,15 @@
+---
+- name: configure webserver
+  hosts: webservers
+  become: yes
+
+  pre_tasks:
+    - debug:
+        msg: 'starting webserevr configuration ......'
+
+  roles:
+    - myvhost
+
+  post_tasks:
+    - debug:
+        msg: 'completed webserver configuration ... '
