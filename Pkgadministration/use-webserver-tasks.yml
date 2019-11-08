@@ -1,0 +1,5 @@
+---
+- name: install webserver
+  hosts: servera
+  tasks:
+    - import_tasks: tasks/webserver_tasks.yml

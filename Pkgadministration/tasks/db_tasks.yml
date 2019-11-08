@@ -1,0 +1,11 @@
+---
+- name: install mysql
+  yum:  
+    name: mysql
+    state: latest
+
+- name: start mysql service
+  service:
+    name: mysqld
+    state: started
+    enabled: true

@@ -1,0 +1,6 @@
+---
+- name: Install MySql
+  hosts: servera
+  become: yes
+  tasks:
+    - import_tasks: tasks/db_tasks.yml
