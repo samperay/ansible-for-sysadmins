@@ -1,0 +1,8 @@
+---
+# handlers file for rootlogindisable
+- name: restart sshd
+  service:
+    name: sshd
+    state: restarted
+    enabled: true
+  

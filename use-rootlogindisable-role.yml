@@ -1,0 +1,17 @@
+---
+- name: disable root login
+  hosts: servera
+  become: yes
+
+  pre_tasks:
+    - debug: 
+        msg: 'INFO: Disabing root login .. '
+  
+  roles:
+    - rootlogindisable
+
+  post_tasks:
+    - debug:
+        msg: 'Success: Disabled root login ..'
+
+

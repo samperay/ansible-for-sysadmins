@@ -1,0 +1,9 @@
+---
+# tasks file for rootlogindisable
+- name: disable root login
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    state: present
+    regexp: "^PermitRootLogin"
+    line: "PermitRootLogin no"
+  notify: restart sshd
