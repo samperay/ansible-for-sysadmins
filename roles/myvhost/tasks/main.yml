@@ -1,0 +1,26 @@
+---
+# tasks file for myvhost
+- name: install httpd
+  yum:
+    name: httpd
+    state: latest
+
+- name: start service
+  service:
+    name: httpd
+    state: started
+    enabled: true
+
+- name: configure virtual website
+  template:
+    src: vhosts.conf.j2
+    dest: /etc/httpd/conf.d/vhost.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart httpd
+
+- name: configure index.html
+  copy:
+    src: html/
+    dest: "/var/www/vhosts/{{ ansible_hostname }}/"

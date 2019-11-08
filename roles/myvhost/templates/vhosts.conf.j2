@@ -1,0 +1,13 @@
+<VirtualHost *:80>
+ServerAdmin vagrant@servera
+ServerName servera
+ErrorLog logs/servera-error.log
+CustomLog logs/servera-common.log common
+DocumentRoot /var/www/vhosts/servera/
+
+<Directory /var/www/vhosts/servera/>
+Options +Indexes +FollowSymlinks +Includes
+Order allow,deny
+Allow from all
+</Directory>
+</VirtualHost>
