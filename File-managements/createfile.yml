@@ -1,0 +1,14 @@
+---
+- name: create file
+  hosts: servera
+  become: yes
+
+  tasks: 
+    - name: create file
+      file:
+        path: /tmp/lineinfile.txt
+        owner: root
+        group: root
+        mode: 0644
+        state: touch
+

@@ -1,0 +1,21 @@
+---
+- name: create file and write single line into the file
+  hosts: servera
+  become: yes
+
+  tasks: 
+    - name: create file
+      file:
+        path: /tmp/blockinfile.txt
+        owner: root
+        group: root
+        mode: 0644
+        state: touch
+    
+    - name: write single line into the file
+      blockinfile:
+        path: /tmp/blockinfile.txt
+        block: 'This is first line |
+                This is second line
+                This is third line'
+        state: present

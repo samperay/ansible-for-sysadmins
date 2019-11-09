@@ -1,0 +1,19 @@
+---
+- name: create file and write single line into the file
+  hosts: servera
+  become: yes
+
+  tasks: 
+    - name: create file
+      file:
+        path: /tmp/lineinfile.txt
+        owner: root
+        group: root
+        mode: 0644
+        state: touch
+    
+    - name: write single line into the file
+      lineinfile:
+        path: /tmp/lineinfile.txt
+        line: 'This is writte as a single line in the file'
+        state: present
