@@ -1,0 +1,17 @@
+---
+- name: backup log, audit files in folder
+  hosts: servera
+  become: yes
+
+  tasks:
+    - name: retrive 'secure' log files
+      fetch:
+        src: "{{ item }}"
+        dest: /tmp/backup
+        flat: no
+      loop:
+        - /var/log/secure
+        - /var/log/messages
+        - /var/log/audit/audit.log
+        - /var/log/dmesg
+        - /var/log/yum.log
