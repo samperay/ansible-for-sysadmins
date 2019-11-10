@@ -1,3 +1,26 @@
-System: "{{ ansible_facts.hostname }}"
-Owner: "{{ system_owner }}"
-Environment: "{{ env }}"
+===============================================================
+                    ==================
+                   |SYSTEM INFOMATION |
+                    ==================
+
+Nodename: {{ ansible_nodename }}
+FQDN: {{ ansible_fqdn }}
+Hostname: {{ ansible_hostname }}
+Operating System Family: {{ ansible_os_family }}
+System: {{ ansible_system }}
+OS Distribution: {{ ansible_distribution }}
+OS Architecture: {{ ansible_architecture }}
+Kernel Version: {{ ansible_kernel }}
+Free Memory(MB): {{ ansible_memfree_mb }}
+Total Memory(MB): {{ ansible_memtotal_mb }}
+Free Swap Memory(MB): {{ ansible_swapfree_mb }}
+Total Swap Memory(MB): {{ ansible_swaptotal_mb }}
+Primary Interface: {{ ansible_default_ipv4.interface }}
+IPaddress: {{ ansible_default_ipv4.address }}
+Netmask: {{ ansible_default_ipv4.netmask }}
+Gateway: {{ ansible_default_ipv4.gateway }}
+
+================================================================
+
+
+
