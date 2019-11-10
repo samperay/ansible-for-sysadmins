@@ -4,10 +4,22 @@
   become: yes
 
   tasks:
+#    - name: get date from ansible
+#      debug:
+#        var=ansible_date_time.date
+
+#    - name: create folder with today date
+#      file:
+#        state: directory
+#        dest: /tmp/backup/{{ ansible_date_time.date }}
+#        owner: root
+#        group: root
+#        mode: 0755
+        
     - name: retrive 'secure' log files
       fetch:
         src: "{{ item }}"
-        dest: /tmp/backup
+        dest: /tmp/backup/{{ ansible_date_time.date }}
         flat: no
       loop:
         - /var/log/secure
