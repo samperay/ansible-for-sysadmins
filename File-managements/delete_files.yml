@@ -1,0 +1,23 @@
+---
+- name: delete then create file 
+  hosts: servera
+  vars:
+    tempfile: /tmp/testfile.txt
+  tasks:
+    - name: retrive file status
+      stat:
+        path: "{{ tempfile }}"
+      register: output
+
+    - name: Delete file if exists
+      file:
+        path: "{{ tempfile }}"
+        state: absent
+      when: output.stat.exists == true
+      register: deloutput
+
+    - name: Create file if not exists
+      file:
+        path: "{{ tempfile }}" 
+        state: touch
+      when: output.stat.exists == false or deloutput.changed == true
