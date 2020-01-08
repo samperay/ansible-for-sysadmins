@@ -1,0 +1,18 @@
+---
+- name: Install packages on {{ ansible_hostname }}
+  hosts: all
+  vars_files:
+    - packages.yml
+  become: yes
+
+
+  tasks:
+    - name: install Docker 
+      yum:
+        name: "{{ item }}"
+        state: present
+      loop:
+        packages
+        
+      
+  
