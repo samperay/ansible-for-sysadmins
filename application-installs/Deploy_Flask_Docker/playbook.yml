@@ -1,11 +1,19 @@
 ---
-- name: Install packages on {{ ansible_hostname }}
+- name: Install packages
   hosts: all
   vars_files:
     - packages.yml
   become: yes
 
   tasks:
+    - name: add docker repository
+      get_url:
+        url: https://download.docker.com/linux/centos/docker-ce.repo
+        dest: /etc/yum.repos.d/
+        owner: root
+        group: root
+        mode: 0644
+
     - name: install Docker 
       yum:
         name: "{{ item }}"
