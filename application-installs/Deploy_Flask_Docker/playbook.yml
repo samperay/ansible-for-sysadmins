@@ -19,6 +19,31 @@
         name: "{{ item }}"
         state: present
       loop: "{{ packages }}"
+
+    - name: install docker-py for ansible tasks
+      pip:
+        name: docker-py
+        state: latest
         
-      
-  
+    - name: start docker service
+      service:
+        name: docker
+        state: started
+        enabled: true
+
+- name: starting applications
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: pull docker image
+      docker_image:
+        name: sunlnx/flask-app
+        pull: yes
+       
+    - name: start container
+      docker_container:
+        name: myflask
+        image: sunlnx/flask-app
+        state: started
+        published_ports: '5000:5000'
