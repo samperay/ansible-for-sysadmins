@@ -10,8 +10,7 @@
       yum:
         name: "{{ item }}"
         state: present
-      loop:
-        packages
+      loop: "{{ packages }}"
         
       
   
